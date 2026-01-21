@@ -1,0 +1,298 @@
+version: '3.8'
+
+services:
+  # Skill 01: Competitive Intelligence War Room
+  skill-01-competitive-intel:
+    build:
+      context: ./skills/01-competitive-intelligence
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8080"
+    environment:
+      - SKILL_NAME=competitive-intelligence
+      - PORT=8080
+      - FIRESTORE_EMULATOR_HOST=firestore:8080
+      - PUBSUB_EMULATOR_HOST=pubsub:8085
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+      - pubsub
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Skill 02: Client Health Monitor
+  skill-02-client-health:
+    build:
+      context: ./skills/02-client-health-monitor
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8080"
+    environment:
+      - SKILL_NAME=client-health-monitor
+      - PORT=8080
+      - FIRESTORE_EMULATOR_HOST=firestore:8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+      - postgres
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Skill 03: Win-Loss Analyzer
+  skill-03-win-loss:
+    build:
+      context: ./skills/03-win-loss-analyzer
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8080"
+    environment:
+      - SKILL_NAME=win-loss-analyzer
+      - PORT=8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+      - postgres
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Skill 04: Content Repurposing Engine
+  skill-04-content-repurpose:
+    build:
+      context: ./skills/04-content-repurposing
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8080"
+    environment:
+      - SKILL_NAME=content-repurposing
+      - PORT=8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+      - redis
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Skill 05: Conversation Intelligence
+  skill-05-conversation-intel:
+    build:
+      context: ./skills/05-conversation-intelligence
+      dockerfile: Dockerfile
+    ports:
+      - "8005:8080"
+    environment:
+      - SKILL_NAME=conversation-intelligence
+      - PORT=8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+      - postgres
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Skill 06: Contract Risk Detector
+  skill-06-contract-risk:
+    build:
+      context: ./skills/06-contract-risk-detector
+      dockerfile: Dockerfile
+    ports:
+      - "8006:8080"
+    environment:
+      - SKILL_NAME=contract-risk-detector
+      - PORT=8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Skill 07: Upsell Identifier
+  skill-07-upsell:
+    build:
+      context: ./skills/07-upsell-identifier
+      dockerfile: Dockerfile
+    ports:
+      - "8007:8080"
+    environment:
+      - SKILL_NAME=upsell-identifier
+      - PORT=8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+      - postgres
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Skill 08: Network Mapper
+  skill-08-network-mapper:
+    build:
+      context: ./skills/08-network-mapper
+      dockerfile: Dockerfile
+    ports:
+      - "8008:8080"
+    environment:
+      - SKILL_NAME=network-mapper
+      - PORT=8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+      - neo4j
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Skill 09: Demo Generator
+  skill-09-demo-gen:
+    build:
+      context: ./skills/09-demo-generator
+      dockerfile: Dockerfile
+    ports:
+      - "8009:8080"
+    environment:
+      - SKILL_NAME=demo-generator
+      - PORT=8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+    volumes:
+      - ./shared:/app/shared:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - mab-network
+
+  # Skill 10: Revenue Forecasting
+  skill-10-revenue-forecast:
+    build:
+      context: ./skills/10-revenue-forecasting
+      dockerfile: Dockerfile
+    ports:
+      - "8010:8080"
+    environment:
+      - SKILL_NAME=revenue-forecasting
+      - PORT=8080
+    env_file:
+      - .env
+    depends_on:
+      - firestore
+      - postgres
+    volumes:
+      - ./shared:/app/shared:ro
+    networks:
+      - mab-network
+
+  # Supporting Services
+  firestore:
+    image: google/cloud-sdk:latest
+    command: gcloud beta emulators firestore start --host-port=0.0.0.0:8080
+    ports:
+      - "8080:8080"
+    networks:
+      - mab-network
+
+  pubsub:
+    image: google/cloud-sdk:latest
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
+    ports:
+      - "8085:8085"
+    networks:
+      - mab-network
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: mab_analytics
+      POSTGRES_USER: mab_user
+      POSTGRES_PASSWORD: mab_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - mab-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - mab-network
+
+  neo4j:
+    image: neo4j:5
+    environment:
+      NEO4J_AUTH: neo4j/mab_dev_password
+      NEO4J_PLUGINS: '["apoc", "graph-data-science"]'
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - mab-network
+
+  # Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - mab-network
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: mab_dev_password
+      GF_INSTALL_PLUGINS: grafana-clock-panel
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - prometheus
+    networks:
+      - mab-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  neo4j_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  mab-network:
+    driver: bridge

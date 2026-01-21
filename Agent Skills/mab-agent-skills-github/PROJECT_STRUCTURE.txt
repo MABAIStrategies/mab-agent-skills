@@ -1,0 +1,15 @@
+./DEPLOYMENT_GUIDE.md
+./MASTER_IMPLEMENTATION_GUIDE.md
+./PROJECT_STRUCTURE.txt
+./README.md
+./SKILLS_03_TO_10_REFERENCE.md
+./docker-compose.yml
+./requirements.txt
+./shared/auth.py
+./shared/database.py
+./shared/logging.py
+./shared/utils/llm.py
+./skills/01-competitive-intelligence/SKILL.md
+./skills/01-competitive-intelligence/handler.py
+./skills/01-competitive-intelligence/service.py
+./skills/02-client-health-monitor/SKILL.md
