@@ -300,4 +300,4 @@ Built 10 production-ready skills for business automation.
 
 **Built with 🏀 by Mark Bockrath**
 
-*Launching MAB AI Strategies - January 1, 2026*****
+
