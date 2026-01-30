@@ -1,0 +1,16 @@
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Professional headshot of Mark Bockrath">
+  <defs>
+    <linearGradient id="goldGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D6A756"/>
+      <stop offset="100%" stop-color="#F7D98B"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="24" fill="#0B1E3A"/>
+  <circle cx="120" cy="96" r="48" fill="url(#goldGlow)"/>
+  <path d="M60 210 C70 170 170 170 180 210" fill="#1E355A"/>
+  <circle cx="120" cy="92" r="38" fill="#F7F4EF"/>
+  <circle cx="105" cy="88" r="6" fill="#0B1E3A"/>
+  <circle cx="135" cy="88" r="6" fill="#0B1E3A"/>
+  <path d="M104 110 C112 118 128 118 136 110" stroke="#0B1E3A" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="120" y="228" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#F7F4EF">Mark Bockrath</text>
+</svg>
