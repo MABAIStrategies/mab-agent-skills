@@ -1,0 +1,9 @@
+<svg width="320" height="120" viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MAB AI Strategies logo">
+  <rect width="320" height="120" rx="16" fill="#0B1E3A"/>
+  <g fill="none" stroke="#D6A756" stroke-width="3">
+    <circle cx="60" cy="60" r="34"/>
+    <path d="M42 72 L60 38 L78 72"/>
+  </g>
+  <text x="112" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="28" fill="#F7F4EF" font-weight="700">MAB AI</text>
+  <text x="112" y="88" font-family="'Segoe UI', Arial, sans-serif" font-size="16" fill="#D6A756" letter-spacing="2">STRATEGIES</text>
+</svg>
