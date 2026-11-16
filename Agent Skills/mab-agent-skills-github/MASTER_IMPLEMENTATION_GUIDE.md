@@ -324,7 +324,7 @@ return {"success": True, "status": "processing", "job_id": job_id}
 ## 📊 MONITORING DASHBOARDS
 
 ### Grafana (http://localhost:3000)
-Default credentials: `admin` / `mab_dev_password`
+Default credentials: `admin` / `<your-grafana-admin-password>`
 
 **Pre-configured Dashboards:**
 1. **System Health**
