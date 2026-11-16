@@ -96,7 +96,7 @@ curl http://localhost:8001/health
 
 # View monitoring dashboard
 open http://localhost:3000  # Grafana
-# Login: admin / mab_dev_password
+# Login: admin / <your-grafana-admin-password>
 ```
 
 **🎉 You're running a complete AI agent platform!**

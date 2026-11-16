@@ -58,7 +58,7 @@ curl http://localhost:8001/health
 # Returns: {"status": "healthy"}
 
 # View monitoring
-open http://localhost:3000  # Grafana (admin/mab_dev_password)
+open http://localhost:3000  # Grafana (admin/<your-grafana-admin-password>)
 ```
 
 **You're running 10 AI agent skills in under 2 minutes!** 🎉

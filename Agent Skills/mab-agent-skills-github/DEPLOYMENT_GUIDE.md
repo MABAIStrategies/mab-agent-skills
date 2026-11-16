@@ -249,7 +249,7 @@ skills/XX-skill-name/
 ## 📊 MONITORING & OBSERVABILITY
 
 ### Grafana Dashboards (http://localhost:3000)
-Default password: `mab_dev_password`
+Default password: `<your-grafana-admin-password>`
 
 Pre-configured dashboards:
 1. **System Health** - CPU, memory, request rates
